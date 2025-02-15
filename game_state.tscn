@@ -1,0 +1,61 @@
+[gd_scene load_steps=13 format=3 uid="uid://cs7uw0hpepfbl"]
+
+[ext_resource type="Script" path="res://game_state.gd" id="1_ok0ln"]
+[ext_resource type="Script" path="res://human_player_sprite.gd" id="2_gxjhx"]
+[ext_resource type="Script" path="res://global_consts.gd" id="2_ronoy"]
+[ext_resource type="PackedScene" uid="uid://ddoinswy8ehqm" path="res://player.tscn" id="3_ih7gk"]
+[ext_resource type="Script" path="res://coord_system.gd" id="3_xl57t"]
+[ext_resource type="Script" path="res://computer_player_sprite.gd" id="4_fqiiu"]
+[ext_resource type="Script" path="res://court_sprite.gd" id="5_j6ev6"]
+[ext_resource type="Texture2D" uid="uid://dvqsjagah6d3y" path="res://Entities/Art/tennis_ball.png" id="6_mcruo"]
+[ext_resource type="Script" path="res://tennis_ball.gd" id="7_ss0wj"]
+[ext_resource type="Texture2D" uid="uid://bvl6wjo7xbqny" path="res://Entities/Art/tennis_ball_shadow.png" id="8_4t5nl"]
+[ext_resource type="Script" path="res://tennis_ball_shadow.gd" id="9_vh1qr"]
+[ext_resource type="Script" path="res://net.gd" id="10_3rghk"]
+
+[node name="GameState" type="Node"]
+script = ExtResource("1_ok0ln")
+
+[node name="GlobalConsts" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_ronoy")
+
+[node name="CoordSystem" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_xl57t")
+
+[node name="CourtSprite" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_j6ev6")
+
+[node name="HumanPlayer" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="HumanPlayerSprite" parent="HumanPlayer" instance=ExtResource("3_ih7gk")]
+unique_name_in_owner = true
+script = ExtResource("2_gxjhx")
+
+[node name="ComputerPlayer" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="ComputerPlayerSprite" parent="ComputerPlayer" instance=ExtResource("3_ih7gk")]
+unique_name_in_owner = true
+script = ExtResource("4_fqiiu")
+
+[node name="TennisBall" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+z_index = 1
+texture = ExtResource("6_mcruo")
+script = ExtResource("7_ss0wj")
+
+[node name="TennisBallShadow" type="Sprite2D" parent="TennisBall"]
+z_index = -1
+texture = ExtResource("8_4t5nl")
+script = ExtResource("9_vh1qr")
+
+[node name="Net" type="Node2D" parent="."]
+script = ExtResource("10_3rghk")
+
+[connection signal="square_clicked" from="CourtSprite" to="." method="_on_square_clicked"]
+[connection signal="end_turn" from="HumanPlayer/HumanPlayerSprite" to="." method="_end_turn"]
+[connection signal="end_turn" from="ComputerPlayer/ComputerPlayerSprite" to="." method="_end_turn"]
