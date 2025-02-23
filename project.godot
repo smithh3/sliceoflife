@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Slice Of Life"
-run/main_scene="res://main.tscn"
+run/main_scene="res://Main/main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GlobalConsts="*res://global_consts.gd"
-CoordSystem="*res://coord_system.gd"
+GlobalConsts="*res://Common/global_consts.gd"
+CoordSystem="*res://Common/coord_system.gd"
 
 [editor_plugins]
 

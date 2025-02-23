@@ -2,10 +2,7 @@ extends Node
 
 var players = []
 var current_player_index = 0
-#@onready var human_player: HumanPlayer = preload("res://human_player.gd").new()
-#@onready var human_player = %Human
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var tennis_ball = %TennisBall
 	players.append(%HumanPlayerSprite)
@@ -19,7 +16,6 @@ func start_turn():
 	print("Starting turn for player:", current_player)
 	current_player.take_turn()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
