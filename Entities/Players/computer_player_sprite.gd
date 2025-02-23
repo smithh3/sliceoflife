@@ -6,7 +6,7 @@ class_name ComputerPlayerSprite
 func _ready() -> void:
 	super()
 	grid_y_range = [GlobalConsts.GRID_Y / 2, GlobalConsts.GRID_Y]
-	var grid_pos = Vector2(GlobalConsts.GRID_X / 4, 0)
+	grid_pos = Vector2(GlobalConsts.GRID_X / 4, 0)
 	position = CoordSystem.grid_coords_to_pixels(grid_pos)
 
 
@@ -16,3 +16,4 @@ func _process(delta: float) -> void:
 
 func take_turn() -> void:
 	super()
+	print("computer turn starting")

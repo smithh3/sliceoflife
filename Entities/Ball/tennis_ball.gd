@@ -1,38 +1,33 @@
 extends Sprite2D
 
-
 class_name TennisBall
 
 
-var start_pos = Vector2(0, 0)
-var target_pos = Vector2(0, 0)
-var velocity = Vector2(0, 0)
-var moving = false
-var height = 0
-var position_2d = Vector2(0, 0)
-#@onready var court_sprite = %CourtSprite
+
+var start_pos: Vector2 = Vector2(0, 0)
+var target_pos: Vector2 = Vector2(0, 0)
+var velocity: Vector2 = Vector2(0, 0)
+var moving: bool = false
+var height: int = 0
+var position_2d: Vector2 = Vector2(0, 0)
 var court_sprite: CourtSprite
 
 
-func set_to_grid_pos(grid_pos):
+func set_to_grid_pos(grid_pos: Vector2) -> void:
 	var pixel_pos = court_sprite.get_pixel_coords(grid_pos[0], grid_pos[1])
 	position = Vector2i(pixel_pos + court_sprite.get_grid_centre_offset())
 	position_2d = position
-	print(str(position))
 
-func update_height(new_height):
+func update_height(new_height: int) -> void:
 	height = new_height
 	position = position_2d + Vector2(0, -height)
 
-func move_to_grid_pos(grid_pos):
+func move_to_grid_pos(grid_pos: Vector2) -> void:
 	target_pos = court_sprite.get_pixel_coords(grid_pos[0], grid_pos[1])
 	target_pos += court_sprite.get_grid_centre_offset()
-	var SPEED_100 = court_sprite.pixels_per_metre * 44
-	var speed = randi_range(SPEED_100 * 0.6, SPEED_100 * 1.2)
-	
+	var speed = CoordSystem.mph_to_pps(50)
 	velocity = (target_pos - position_2d).normalized() * speed
 	moving = true
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -46,7 +41,7 @@ func _physics_process(delta: float) -> void:
 			position_2d += velocity * delta
 		else:
 			position_2d = target_pos
-			velocity = 0
+			velocity = Vector2(0, 0)
 			moving = false
 			height = 0
 	position = Vector2i(position_2d + Vector2(0, -height))

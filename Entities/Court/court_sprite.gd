@@ -23,7 +23,8 @@ static var total_shift: Vector2
 var selected_block: Vector2
 var grid_loc: Vector2i = Vector2i(0, 0)
 signal square_clicked
-var pixels_per_metre = GlobalConsts.GRID_X * GlobalConsts.GRID_Y / 8
+#var pixels_per_metre = GlobalConsts.GRID_X * GlobalConsts.GRID_Y / 8
+#var pixels_per_metre = GlobalConsts.GRID_X * width / 
 
 func get_grid_centre_offset():
 	return Vector2((x_off - x_shift) / 2, (y_off + y_shift) / 2)
@@ -40,23 +41,11 @@ static func attempt_n_plus_1(x, y):
 	var x_grid = (x_trans / cos(y_axis_angle)) + y_trans * sin(y_axis_angle) - x_trans * tan(y_axis_angle) * sin(y_axis_angle)
 	var y_grid = (y_trans / cos(x_axis_angle)) - y_trans * tan(x_axis_angle) * sin(x_axis_angle) - x_trans * sin(x_axis_angle)
 	var coords_out = Vector2i(x_grid / 29.1, y_grid / 29.3)
-	#print(str(coords_out))
-	#print(x_off)
-	#print(y_trans)
-	#print(y_trans + x_trans * sin(x_axis_angle))
 	return coords_out
 	
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#print(width)
-	#print(depth)
-	#print(rad_to_deg(theta_1))
-	#print(rad_to_deg(theta_2))
-	#print(rad_to_deg(gamma))
-	#texture = load("res://grass_cube.png")
-	#var source_rect = Rect2(Vector2(tile_size.x, 0), tile_size)
-	#print(str(get_viewport_rect().size))
 	var max_x = x_shift + x_off * GlobalConsts.GRID_X
 	var min_x = - x_shift * (GlobalConsts.GRID_Y - 1)
 	var max_y = y_shift * GlobalConsts.GRID_X + y_off * GlobalConsts.GRID_Y + height
@@ -75,29 +64,10 @@ func _ready() -> void:
 	
 	total_shift = Vector2(- x_shift_1 + x_shift_2, - y_shift_1 + y_shift_2)
 	
-	#var max_x = 0
-	#var min_x = 0
-	#var max_y = 0
-	#var min_y = 0
 	for i in range(GlobalConsts.GRID_X):
 		for j in range(GlobalConsts.GRID_Y):
-			var pos = get_pixel_coords(i, j) + Vector2(- x_shift, 0)# + total_shift
-			#max_x = max(max_x, pos[0])
-			#min_x = min(min_x, pos[0])
-			#max_y = max(max_y, pos[1])
-			#min_y = min(min_y, pos[1])
+			var pos = get_pixel_coords(i, j) + Vector2(- x_shift, 0)
 			court_blocks[str(Vector2(i, j))] = CourtBlock.new(pos, grass_cube_texture)
-	
-	
-	#total_shift = Vector2(- x_shift, 0)
-	#total_shift = Vector2(0, 0)
-	
-	#for i in range(grid_x):
-		#for j in range(grid_y):
-			#var block = court_blocks[str(Vector2(i, j))]
-			#block.position[0] = block.position[0] + total_shift[0] - x_shift
-			#block.position[1] = block.position[1] + total_shift[1]
-	
 	
 	queue_redraw()
 

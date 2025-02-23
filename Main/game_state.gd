@@ -9,11 +9,11 @@ func _ready() -> void:
 	players.append(%ComputerPlayerSprite)
 	var court_sprite: CourtSprite = %CourtSprite
 	court_sprite.square_clicked.connect(_on_square_clicked)
+	players[0].place_ball()
 	start_turn()
 
 func start_turn():
 	var current_player = players[current_player_index]
-	print("Starting turn for player:", current_player)
 	current_player.take_turn()
 
 func _process(delta: float) -> void:

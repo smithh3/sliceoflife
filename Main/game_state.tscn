@@ -57,3 +57,5 @@ script = ExtResource("4_fqiiu")
 script = ExtResource("10_3rghk")
 
 [connection signal="square_clicked" from="CourtSprite" to="." method="_on_square_clicked"]
+[connection signal="end_turn" from="HumanPlayer/HumanPlayerSprite" to="." method="_end_turn"]
+[connection signal="end_turn" from="ComputerPlayer/ComputerPlayerSprite" to="." method="_end_turn"]
