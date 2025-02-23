@@ -1,7 +1,7 @@
 extends Node
 
-var players = []
-var current_player_index = 0
+var players: Array = []
+var current_player_index: int = 0
 
 func _ready() -> void:
 	var tennis_ball = %TennisBall
@@ -12,7 +12,7 @@ func _ready() -> void:
 	players[0].place_ball()
 	start_turn()
 
-func start_turn():
+func start_turn() -> void:
 	var current_player = players[current_player_index]
 	current_player.take_turn()
 

@@ -3,7 +3,7 @@ extends Sprite2D
 class_name PlayerSprite
 
 var grid_y_range: Array = []
-signal end_turn
+signal end_turn()
 var tennis_ball: TennisBall
 var square_clicked: Vector2i
 var my_turn: bool = false

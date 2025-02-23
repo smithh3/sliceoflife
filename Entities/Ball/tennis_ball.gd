@@ -3,7 +3,6 @@ extends Sprite2D
 class_name TennisBall
 
 
-
 var start_pos: Vector2 = Vector2(0, 0)
 var target_pos: Vector2 = Vector2(0, 0)
 var velocity: Vector2 = Vector2(0, 0)
@@ -14,8 +13,8 @@ var court_sprite: CourtSprite
 
 
 func set_to_grid_pos(grid_pos: Vector2) -> void:
-	var pixel_pos = court_sprite.get_pixel_coords(grid_pos[0], grid_pos[1])
-	position = Vector2i(pixel_pos + court_sprite.get_grid_centre_offset())
+	var pixel_pos = CoordSystem.get_pixel_coords(grid_pos[0], grid_pos[1])
+	position = Vector2i(pixel_pos + CoordSystem.get_grid_centre_offset())
 	position_2d = position
 
 func update_height(new_height: int) -> void:
@@ -23,8 +22,8 @@ func update_height(new_height: int) -> void:
 	position = position_2d + Vector2(0, -height)
 
 func move_to_grid_pos(grid_pos: Vector2) -> void:
-	target_pos = court_sprite.get_pixel_coords(grid_pos[0], grid_pos[1])
-	target_pos += court_sprite.get_grid_centre_offset()
+	target_pos = CoordSystem.get_pixel_coords(grid_pos[0], grid_pos[1])
+	target_pos += CoordSystem.get_grid_centre_offset()
 	var speed = CoordSystem.mph_to_pps(50)
 	velocity = (target_pos - position_2d).normalized() * speed
 	moving = true

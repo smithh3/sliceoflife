@@ -20,7 +20,7 @@ script = ExtResource("1_ok0ln")
 unique_name_in_owner = true
 script = ExtResource("2_ronoy")
 
-[node name="CoordSystem" type="Node" parent="."]
+[node name="CoordSystem" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_xl57t")
 
